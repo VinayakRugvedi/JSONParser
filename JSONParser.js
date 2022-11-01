@@ -1,8 +1,6 @@
 //Null Parser
-const nullParser = function( data ){
-  if( data.indexOf("null") === 0 ) return ([null, data.slice(4)])
-  return null
-}
+const nullParser = (data) => data.indexOf("null") !== 0 ? null : [null, data.slice(4)]
+
 //Boolean Parser
 const booleanParser = function( data ){
   if( data.indexOf("true") === 0 ) return ([true, data.slice(4,data.length)]);
