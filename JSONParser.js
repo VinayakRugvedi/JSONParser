@@ -2,17 +2,15 @@
 const nullParser = (data) => data.indexOf("null") !== 0 ? null : [null, data.slice(4)]
 
 //Boolean Parser
-const booleanParser = (data) => {
-  if( data.indexOf("true") === 0 ) return ([true, data.slice(4,data.length)]);
-  if( data.indexOf("false") === 0 )  return ([false, data.slice(5,data.length)]);
-  return null;
-}
+const booleanParser = (data) => data.indexOf("true") === 0 ? ([true, data.slice(4,data.length)]) :
+  data.indexOf("false") === 0 ? ([false, data.slice(5,data.length)]) : null
+
 //Number Parser
 const numberParser = (data) => {
   let result = /[-]?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?/.exec(data);
-  if ( result != null && result.index === 0) return ([Number(result[0]), data.trim().slice(result[0].length)]);
-  return null;
+  return result != null && result.index === 0 ? ([Number(result[0]), data.trim().slice(result[0].length)]) : null
 }
+
 //String Parser
 const stringParser = (data) => {
   let i = 1, internal = '', extra = 0;
