@@ -2,19 +2,19 @@
 const nullParser = (data) => data.indexOf("null") !== 0 ? null : [null, data.slice(4)]
 
 //Boolean Parser
-const booleanParser = function( data ){
+const booleanParser = (data) => {
   if( data.indexOf("true") === 0 ) return ([true, data.slice(4,data.length)]);
   if( data.indexOf("false") === 0 )  return ([false, data.slice(5,data.length)]);
   return null;
 }
 //Number Parser
-const numberParser = function( data ){
+const numberParser = (data) => {
   let result = /[-]?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?/.exec(data);
   if ( result != null && result.index === 0) return ([Number(result[0]), data.trim().slice(result[0].length)]);
   return null;
 }
 //String Parser
-const stringParser = function( data ){
+const stringParser = (data) => {
   let i = 1, internal = '', extra = 0;
   if( data[0] === '"'){
       while( i < data.length ){
@@ -44,7 +44,7 @@ const stringParser = function( data ){
   else return null;
 }//end of stringParser
 //Array Parser
-const arrayParser = function( data ){
+const arrayParser = (data) => {
   let i = 0, intermediate =  [], result = [];
   while( data != '' ){
   if( data[i] === '[' ){
@@ -72,7 +72,7 @@ const arrayParser = function( data ){
   return [result, ''];
 }//end of arrayParser
 //Object Parser
-const objectParser = function( data ){
+const objectParser = (data) => {
   let result = {}, name = [], value = [], i = 0;
   while( data != '' ){
     if( data[i] === '{' ){
